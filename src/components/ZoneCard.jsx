@@ -14,7 +14,7 @@ function Zona({ nombre, top, left, width, height, color }) {
       justifyContent: 'center',
       alignItems: 'center',
       fontWeight: 'bold',
-      border: '2px solid black',
+      border: '5px solid black',
       borderRadius: '4px'
     }}>
       {nombre}
