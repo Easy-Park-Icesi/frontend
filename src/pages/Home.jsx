@@ -5,6 +5,8 @@ import { obtenerZonas } from '../services/api';
 
 function Home() {
   const [zonas, setZonas] = useState([]);
+  const [pagina, setPagina] = useState(0);
+  const ITEMS_POR_PAGINA = 6;
 
   useEffect(() => {
     async function fetchData() {
@@ -16,18 +18,31 @@ function Home() {
         console.log('Error en la petición GET:', error);
       }
     }
+
     fetchData();
+
+    const intervaloDatos = setInterval(fetchData, 3000);
+    return () => clearInterval(intervaloDatos);
   }, []);
+
+  useEffect(() => {
+    if (zonas.length === 0) return;
+
+    const intervaloPagina = setInterval(() => {
+      setPagina((prev) => (prev + 1) % Math.ceil(zonas.length / ITEMS_POR_PAGINA));
+    }, 3000);
+
+    return () => clearInterval(intervaloPagina);
+  }, [zonas]);
 
   const getColorSegunOcupacion = (ocupados, total) => {
     const porcentaje = (ocupados / total) * 100;
-    if (porcentaje <= 25) return '#7BEE5F';      // verde
-    if (porcentaje <= 50) return '#FFFF66';      // amarillo
-    if (porcentaje <= 99) return '#FFA500';    // naranja
-    return '#FF4C4C';                            // rojo
+    if (porcentaje <= 25) return '#7BEE5F'; // verde
+    if (porcentaje <= 50) return '#FFFF66'; // amarillo
+    if (porcentaje <= 99) return '#FFA500'; // naranja
+    return '#FF4C4C'; // rojo
   };
 
-  // Posiciones estáticas por zona (para el mapa)
   const posiciones = {
     a: { top: '250px', left: '67px', width: '145px', height: '181px' },
     b: { top: '250px', left: '245px', width: '261px', height: '82px' },
@@ -42,18 +57,21 @@ function Home() {
     z: { top: '10px', left: '1170px', width: '130px', height: '316px' },
   };
 
+  const startIndex = pagina * ITEMS_POR_PAGINA;
+  const zonasPaginadas = zonas.slice(startIndex, startIndex + ITEMS_POR_PAGINA);
+
   return (
     <div style={{ display: 'flex' }}>
       {/* Mapa */}
-      <div 
+      <div
         style={{
           height: '100vh',
           width: '70vw',
-          backgroundColor: 'white',
+          backgroundColor: 'black',
           margin: 0,
           padding: 0,
           overflow: 'hidden',
-          position: 'relative'
+          position: 'relative',
         }}
       >
         <img
@@ -64,24 +82,21 @@ function Home() {
             left: '180px',
             top: '70px',
             height: '902.5px',
-            width: '986px'
+            width: '986px',
           }}
         />
 
         {zonas.map((zona) => {
           const { id, parqueaderos_ocupados, total_de_parqueaderos } = zona;
-          const pos = posiciones[id]; // Convertir a minúsculas para coincidir con las claves del objeto posiciones
-          // console.log("zona:", id, "posición:", pos);
-          console.log("zona:", id, "posición:", pos);
+          const pos = posiciones[id.toLowerCase()];
           if (!pos) return null;
-           
 
           const color = getColorSegunOcupacion(parqueaderos_ocupados, total_de_parqueaderos);
 
           return (
             <Zona
               key={id}
-              nombre={id.toUpperCase()} // Convertir a mayúsculas para mostrar
+              nombre={id.toUpperCase()}
               top={pos.top}
               left={pos.left}
               width={pos.width}
@@ -92,30 +107,42 @@ function Home() {
         })}
       </div>
 
-      {/* Tarjetas al lado */}
-      <div style={{ width: '30vw', padding: '10px', overflowY: 'scroll' }}>
-        <h2>Zonas</h2>
-        {zonas.map((zona) => (
-          <div
-            key={zona.id}
-            style={{
-              border: '1px solid gray',
-              borderRadius: '8px',
-              padding: '10px',
-              marginBottom: '10px',
-              backgroundColor: '#f5f5f5'
-            }}
-          >
-            <h3>Zona {zona.id}</h3>
-            <p>Ocupados: {zona.parqueaderos_ocupados}</p>
-            <p>Totales: {zona.total_de_parqueaderos}</p>
-          </div>
-        ))}
+      {/* Tarjetas paginadas estilo oscuro */}
+      <div style={{ width: '30vw', padding: '20px', backgroundColor: '#121212' }}>
+        <h2 style={{ color: '#fff', marginBottom: '16px' }}>Zonas</h2>
+        {zonasPaginadas.map((zona) => {
+          const disponibles = zona.total_de_parqueaderos - zona.parqueaderos_ocupados;
+
+          return (
+            <div
+              key={zona.id}
+              style={{
+                borderRadius: '12px',
+                padding: '16px',
+                marginBottom: '16px',
+                backgroundColor: '#1e1e1e',
+                color: '#fff',
+                boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
+              }}
+            >
+              <h3 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '12px' }}>
+                Zona {zona.id}
+              </h3>
+              <p style={{ color: '#ccc', fontSize: '16px', margin: 0 }}>
+                Disponibles:{' '}
+                <span style={{ color: '#7BEE5F', fontWeight: 'bold' }}>{disponibles}</span>
+              </p>
+              <p style={{ color: '#ccc', fontSize: '16px', margin: 0 }}>
+                Parqueaderos:{' '}
+                <span style={{ color: '#FF4C4C', fontWeight: 'bold' }}>{zona.total_de_parqueaderos}</span>
+              </p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
 
 export default Home;
-
 
