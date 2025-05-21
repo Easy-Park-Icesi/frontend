@@ -17,8 +17,12 @@ export async function obtenerZonas() {
 
 // src/services/api.js
 export async function obtenerZonas() {
-  const respuesta = await fetch('http://localhost:3001/zonas');
+  const respuesta = await fetch('http://localhost:8080/api/zonas/resumen'); // Cambia la URL según tu configuración
+  if (!respuesta.ok) {
+    throw new Error('hola');
+  }
   const data = await respuesta.json();
   return data;
+
 }
 

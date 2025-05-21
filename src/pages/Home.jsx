@@ -13,6 +13,7 @@ function Home() {
         setZonas(datos);
       } catch (error) {
         console.error('Error al obtener las zonas:', error);
+        console.log('Error en la petición GET:', error);
       }
     }
     fetchData();
@@ -28,14 +29,17 @@ function Home() {
 
   // Posiciones estáticas por zona (para el mapa)
   const posiciones = {
-    A: { top: '250px', left: '67px', width: '145px', height: '181px' },
-    B: { top: '250px', left: '245px', width: '261px', height: '82px' },
-    C: { top: '180px', left: '810px', width: '189px', height: '146px' },
-    D: { top: '10px', left: '810px', width: '189px', height: '150px' },
-    E: { top: '810px', left: '880px', width: '290px', height: '180px' },
-    F: { top: '790px', left: '720px', width: '140px', height: '198px' },
-    G: { top: '870px', left: '245px', width: '394px', height: '116px' },
-    H: { top: '450px', left: '67px', width: '145px', height: '530px' },
+    a: { top: '250px', left: '67px', width: '145px', height: '181px' },
+    b: { top: '250px', left: '245px', width: '261px', height: '82px' },
+    c: { top: '180px', left: '810px', width: '189px', height: '146px' },
+    d: { top: '10px', left: '810px', width: '189px', height: '150px' },
+    e: { top: '810px', left: '880px', width: '290px', height: '180px' },
+    f: { top: '790px', left: '720px', width: '140px', height: '198px' },
+    g: { top: '870px', left: '245px', width: '394px', height: '116px' },
+    h: { top: '450px', left: '67px', width: '145px', height: '530px' },
+    i: { top: '240px', left: '1024px', width: '130px', height: '85px' },
+    j: { top: '10px', left: '1024px', width: '130px', height: '120px' },
+    z: { top: '10px', left: '1170px', width: '130px', height: '316px' },
   };
 
   return (
@@ -66,15 +70,18 @@ function Home() {
 
         {zonas.map((zona) => {
           const { id, parqueaderos_ocupados, total_de_parqueaderos } = zona;
-          const pos = posiciones[id];
+          const pos = posiciones[id]; // Convertir a minúsculas para coincidir con las claves del objeto posiciones
+          // console.log("zona:", id, "posición:", pos);
+          console.log("zona:", id, "posición:", pos);
           if (!pos) return null;
+           
 
           const color = getColorSegunOcupacion(parqueaderos_ocupados, total_de_parqueaderos);
 
           return (
             <Zona
               key={id}
-              nombre={id}
+              nombre={id.toUpperCase()} // Convertir a mayúsculas para mostrar
               top={pos.top}
               left={pos.left}
               width={pos.width}
@@ -86,7 +93,7 @@ function Home() {
       </div>
 
       {/* Tarjetas al lado */}
-      <div style={{ width: '30vw', padding: '20px', overflowY: 'scroll' }}>
+      <div style={{ width: '30vw', padding: '10px', overflowY: 'scroll' }}>
         <h2>Zonas</h2>
         {zonas.map((zona) => (
           <div
