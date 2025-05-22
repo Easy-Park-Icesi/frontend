@@ -129,13 +129,13 @@ function Home() {
                 Zona {zona.id}
               </h3>
               <p style={{ color: '#ccc', fontSize: '16px', margin: 0 }}>
-                Disponibles:{' '}
-                <span style={{ color: '#7BEE5F', fontWeight: 'bold' }}>{disponibles}</span>
-              </p>
-              <p style={{ color: '#ccc', fontSize: '16px', margin: 0 }}>
-                Parqueaderos:{' '}
-                <span style={{ color: '#FF4C4C', fontWeight: 'bold' }}>{zona.total_de_parqueaderos}</span>
-              </p>
+              Disponibles:{' '}
+  <span style={{ color: '#7BEE5F', fontWeight: 'bold' }}>{disponibles}</span>
+</p>
+<p style={{ color: '#ccc', fontSize: '20px', margin: 0, textAlign: 'right' }}>
+  Parqueaderos:{' '}
+  <span style={{ color: '#FF4C4C', fontWeight: 'bold' }}>{zona.total_de_parqueaderos}</span>
+</p>
             </div>
           );
         })}
