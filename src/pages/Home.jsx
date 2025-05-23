@@ -91,7 +91,7 @@ function Home() {
       </div>
 
       {/* Contenedor principal con margen izquierdo para no tapar la imagen */}
-      <div style={{ marginLeft: '0px', display: 'flex' }}>
+      <div style={{ marginLeft: '120px', display: 'flex' }}>
         {/* Mapa */}
         <div
           style={{
@@ -191,20 +191,20 @@ function Home() {
           zIndex: 1000,
         }}
       >
-      {/* Imagen cañasgordas comentada */}
-  {/*
+      {/* Imagen cañasgordas  */}
+  {
   <img
     src={CanasGordasImage}
     alt="Cañas Gordas"
     style={{
-      height: '80px',
-      width: '90%',
+      height: '40px',
+      width: '50%',
       objectFit: 'cover',
       borderRadius: '8px',
       marginBottom: '10px',
     }}
   />
-  */}
+  }
 
         {/* Banner original abajo */}
         <img
