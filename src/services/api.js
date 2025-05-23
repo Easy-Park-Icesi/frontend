@@ -1,11 +1,9 @@
-// src/services/api.js
-/*
-  Este archivo contiene funciones para interactuar con la API.
-  Puedes agregar más funciones según sea necesario.
+//Url&Port.js
+import { apiBaseUrl } from '../config/Url&Port.js';
 
 export async function obtenerZonas() {
   try {
-    const response = await fetch("http://localhost:8080/zonas"); // o el endpoint que te dieron en Postman
+    const response = await fetch(`${apiBaseUrl}/api/zonas/resumen`);
     if (!response.ok) throw new Error("Error al obtener zonas");
     return await response.json();
   } catch (error) {
@@ -13,12 +11,5 @@ export async function obtenerZonas() {
     return [];
   }
 }
-*/
 
-// src/services/api.js
-export async function obtenerZonas() {
-  const respuesta = await fetch('http://localhost:3001/zonas');
-  const data = await respuesta.json();
-  return data;
-}
 

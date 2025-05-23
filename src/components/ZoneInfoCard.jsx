@@ -3,7 +3,7 @@ import React from 'react';
 function ZoneInfoCard({ nombre, ocupados, total }) {
   return (
     <div style={{
-      backgroundColor: '#f0f0f0',
+      backgroundColor: 'black',
       border: '2px solid #ccc',
       borderRadius: '8px',
       padding: '10px',
