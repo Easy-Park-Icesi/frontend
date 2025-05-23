@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import EdificiosImage from '../assets/icons/Edificios.svg';
+import BannerPublicidad from '../assets/icons/banner-publicidad.png';
+import Carrera122Image from '../assets/icons/carrera-122.png'; 
+import CanasGordasImage from '../assets/icons/cañasgordas.png'; 
 import Zona from '../components/ZoneCard';
 import { obtenerZonas } from '../services/api';
 
@@ -15,7 +18,6 @@ function Home() {
         setZonas(datos);
       } catch (error) {
         console.error('Error al obtener las zonas:', error);
-        console.log('Error en la petición GET:', error);
       }
     }
 
@@ -37,10 +39,10 @@ function Home() {
 
   const getColorSegunOcupacion = (ocupados, total) => {
     const porcentaje = (ocupados / total) * 100;
-    if (porcentaje <= 25) return '#7BEE5F'; // verde
-    if (porcentaje <= 50) return '#FFFF66'; // amarillo
-    if (porcentaje <= 99) return '#FFA500'; // naranja
-    return '#FF4C4C'; // rojo
+    if (porcentaje <= 25) return '#7BEE5F';
+    if (porcentaje <= 50) return '#FFFF66';
+    if (porcentaje <= 99) return '#FFA500';
+    return '#FF4C4C';
   };
 
   const posiciones = {
@@ -61,88 +63,163 @@ function Home() {
   const zonasPaginadas = zonas.slice(startIndex, startIndex + ITEMS_POR_PAGINA);
 
   return (
-    <div style={{ display: 'flex' }}>
-      {/* Mapa */}
+    <>
+      {/* Imagen fija izquierda */}
       <div
         style={{
+          position: 'fixed',
+          top: 0,
+          left: '0',
           height: '100vh',
-          width: '70vw',
-          backgroundColor: 'black',
-          margin: 0,
-          padding: 0,
-          overflow: 'hidden',
-          position: 'relative',
+          width: '80px',
+          backgroundColor: '#000',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1100,
         }}
       >
         <img
-          src={EdificiosImage}
-          alt="Edificios"
+          src={Carrera122Image}
+          alt="Carrera 122"
           style={{
-            position: 'absolute',
-            left: '180px',
-            top: '70px',
-            height: '902.5px',
-            width: '986px',
+            maxHeight: '90%',
+            maxWidth: '100%',
+            objectFit: 'contain',
           }}
         />
-
-        {zonas.map((zona) => {
-          const { id, parqueaderos_ocupados, total_de_parqueaderos } = zona;
-          const pos = posiciones[id.toLowerCase()];
-          if (!pos) return null;
-
-          const color = getColorSegunOcupacion(parqueaderos_ocupados, total_de_parqueaderos);
-
-          return (
-            <Zona
-              key={id}
-              nombre={id.toUpperCase()}
-              top={pos.top}
-              left={pos.left}
-              width={pos.width}
-              height={pos.height}
-              color={color}
-            />
-          );
-        })}
       </div>
 
-      {/* Tarjetas paginadas estilo oscuro */}
-      <div style={{ width: '30vw', padding: '20px', backgroundColor: '#121212' }}>
-        <h2 style={{ color: '#fff', marginBottom: '16px' }}>Zonas</h2>
-        {zonasPaginadas.map((zona) => {
-          const disponibles = zona.total_de_parqueaderos - zona.parqueaderos_ocupados;
+      {/* Contenedor principal con margen izquierdo para no tapar la imagen */}
+      <div style={{ marginLeft: '0px', display: 'flex' }}>
+        {/* Mapa */}
+        <div
+          style={{
+            height: '100vh',
+            width: '70vw',
+            backgroundColor: 'black',
+            margin: 0,
+            padding: 0,
+            overflow: 'hidden',
+            position: 'relative',
+          }}
+        >
+          <img
+            src={EdificiosImage}
+            alt="Edificios"
+            style={{
+              position: 'absolute',
+              left: '180px',
+              top: '70px',
+              height: '902.5px',
+              width: '986px',
+            }}
+          />
 
-          return (
-            <div
-              key={zona.id}
-              style={{
-                borderRadius: '12px',
-                padding: '16px',
-                marginBottom: '16px',
-                backgroundColor: '#1e1e1e',
-                color: '#fff',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
-              }}
-            >
-              <h3 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '12px' }}>
-                Zona {zona.id}
-              </h3>
-              <p style={{ color: '#ccc', fontSize: '16px', margin: 0 }}>
-              Disponibles:{' '}
-  <span style={{ color: '#7BEE5F', fontWeight: 'bold' }}>{disponibles}</span>
-</p>
-<p style={{ color: '#ccc', fontSize: '20px', margin: 0, textAlign: 'right' }}>
-  Parqueaderos:{' '}
-  <span style={{ color: '#FF4C4C', fontWeight: 'bold' }}>{zona.total_de_parqueaderos}</span>
-</p>
-            </div>
-          );
-        })}
+          {zonas.map((zona) => {
+            const { id, parqueaderos_ocupados, total_de_parqueaderos } = zona;
+            const pos = posiciones[id.toLowerCase()];
+            if (!pos) return null;
+
+            const color = getColorSegunOcupacion(parqueaderos_ocupados, total_de_parqueaderos);
+
+            return (
+              <Zona
+                key={id}
+                nombre={id.toUpperCase()}
+                top={pos.top}
+                left={pos.left}
+                width={pos.width}
+                height={pos.height}
+                color={color}
+              />
+            );
+          })}
+        </div>
+
+        {/* Tarjetas paginadas estilo oscuro */}
+        <div style={{ width: '30vw', padding: '20px', backgroundColor: '#121212' }}>
+          <h2 style={{ color: '#fff', marginBottom: '16px', fontSize: '28px' }}>Zonas</h2>
+          {zonasPaginadas.map((zona) => {
+            const disponibles = zona.total_de_parqueaderos - zona.parqueaderos_ocupados;
+
+            return (
+              <div
+                key={zona.id}
+                style={{
+                  borderRadius: '12px',
+                  padding: '16px',
+                  marginBottom: '16px',
+                  backgroundColor: '#1e1e1e',
+                  color: '#fff',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
+                }}
+              >
+                <h3 style={{ fontSize: '32px', fontWeight: '600', marginBottom: '12px' }}>
+                  Zona {zona.id}
+                </h3>
+                <p style={{ color: '#ccc', fontSize: '20px', margin: 0 }}>
+                  Disponibles:{' '}
+                  <span style={{ color: '#7BEE5F', fontWeight: 'bold', fontSize: '20px' }}>
+                    {disponibles}
+                  </span>
+                </p>
+                <p style={{ color: '#ccc', fontSize: '24px', margin: 0, textAlign: 'right' }}>
+                  Parqueaderos:{' '}
+                  <span style={{ color: '#FF4C4C', fontWeight: 'bold', fontSize: '24px' }}>
+                    {zona.total_de_parqueaderos}
+                  </span>
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+
+      {/* Contenedor fijo abajo con dos imágenes */}
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          backgroundColor: '#000',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '10px 0',
+          zIndex: 1000,
+        }}
+      >
+      {/* Imagen cañasgordas comentada */}
+  {/*
+  <img
+    src={CanasGordasImage}
+    alt="Cañas Gordas"
+    style={{
+      height: '80px',
+      width: '90%',
+      objectFit: 'cover',
+      borderRadius: '8px',
+      marginBottom: '10px',
+    }}
+  />
+  */}
+
+        {/* Banner original abajo */}
+        <img
+          src={BannerPublicidad}
+          alt="Publicidad"
+          style={{
+            height: '80px',
+            width: '90%',
+            objectFit: 'cover',
+            borderRadius: '8px',
+          }}
+        />
+      </div>
+    </>
   );
 }
 
 export default Home;
-
