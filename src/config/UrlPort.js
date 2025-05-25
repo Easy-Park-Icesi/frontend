@@ -1,5 +1,4 @@
-// src/config/Url&Port.js
-// Este archivo contiene la configuración de la URL y el puerto del backend.
-export const backendUrl = 'http://localhost';
-export const backendPort = '8080';
+export const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost';
+export const backendPort = process.env.REACT_APP_BACKEND_PORT || '8080';
 export const apiBaseUrl = `${backendUrl}:${backendPort}`;
+
