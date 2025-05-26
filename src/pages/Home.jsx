@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import EdificiosImage from '../assets/icons/Edificios.svg';
 import BannerPublicidad from '../assets/icons/banner-publicidad.png';
 import Carrera122Image from '../assets/icons/carrera-122.png';
-import CanasGordasImage from '../assets/icons/cañasgordas.png'; // Comentado temporalmente
+import CanasGordasImage from '../assets/icons/cañasgordas.png'; 
+import FlechaHorizontal from '../assets/icons/Arrow-2-horizontal.png' ;
+import FlechaVertical from '../assets/icons/Arrow-1-vertical.png' ;
 import Zona from '../components/ZoneCard';
 import { obtenerZonas } from '../services/api';
 
@@ -116,6 +118,34 @@ function Home() {
             }}
           />
 
+          <img
+            src={FlechaHorizontal}
+            alt="Flecha"
+            style={{
+              position: 'absolute',
+              top: '413px',     // Cambia esto según la posición que necesites
+              left: '90px',    // Cambia esto también
+              width: '40px',    // Tamaño de la flecha
+              transform: 'rotate(360deg)', // Gírala si quieres que apunte en otra dirección
+              zIndex: 900
+            }}
+          />
+          <img
+            src={FlechaVertical}
+            alt="Flecha"
+            style={{
+              position: 'absolute',
+              top: '920px',     // Cambia esto según la posición que necesites
+              left: '608px',    // Cambia esto también
+              width: '40px',    // Tamaño de la flecha
+              transform: 'rotate(360deg)', // Gírala si quieres que apunte en otra dirección
+              zIndex: 900
+            }}
+          />
+
+
+
+
           {zonas.map((zona) => {
             const { id, parqueaderos_ocupados, total_de_parqueaderos } = zona;
             const pos = posiciones[id.toLowerCase()];
@@ -135,6 +165,9 @@ function Home() {
               />
             );
           })}
+
+      
+
         </div>
 
         {/* Tarjetas paginadas estilo oscuro */}
