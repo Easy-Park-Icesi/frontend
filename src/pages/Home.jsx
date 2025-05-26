@@ -70,8 +70,8 @@ function Home() {
           position: 'fixed',
           top: 0,
           left: 40,
-          height: '100vh',
-          width: '80px',
+          height: '90vh',
+          width: '85px',
           backgroundColor: '#000',
           display: 'flex',
           justifyContent: 'center',
@@ -209,8 +209,8 @@ function Home() {
       <div
         style={{
           position: 'fixed',
-          width: '50%',
-          bottom: '100px',
+          width: '45%',
+          bottom: '95px',
           left: '30%',
           transform: 'translateX(-50%)',
           zIndex: 1001,
