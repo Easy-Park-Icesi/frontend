@@ -204,14 +204,14 @@ function Home() {
         </div>
       </div>
 
-      {/* Imagen de Cañasgordas comentada temporalmente */}
+      {/* Imagen de Cañasgordas  */}
       {
       <div
         style={{
           position: 'fixed',
           width: '50%',
           bottom: '100px',
-          left: '40%',
+          left: '30%',
           transform: 'translateX(-50%)',
           zIndex: 1001,
         }}
