@@ -16,6 +16,8 @@ function Zona({ nombre, top, left, width, height, color }) {
       fontWeight: 'bold',
       border: '5px solid black',
       borderRadius: '4px'
+      
+
     }}>
       {nombre}
     </div>
