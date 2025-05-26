@@ -7,8 +7,6 @@ import FlechaHorizontal from '../assets/icons/Arrow-2-horizontal.png' ;
 import FlechaVertical from '../assets/icons/Arrow-1-vertical.png' ;
 import Zona from '../components/ZoneCard';
 import { obtenerZonas } from '../services/api';
-import  ZoneInforCard from '../components/ZoneInfoCard';
-
 
 function Home() {
   const [zonas, setZonas] = useState([]);
@@ -184,7 +182,19 @@ function Home() {
             }}
           >
 
-          <h2 style={{ color: '#fff', marginBottom: '16px', fontSize: '28px' }}>Zonas</h2>
+          <h2 
+  style={{ 
+    color: '#fff', 
+    marginBottom: '16px', 
+    fontSize: '40px',    // más grande
+    textAlign: 'center', // centrado
+    fontFamily: "'Arial Black', Arial, sans-serif",  // tipografía diferente, por ejemplo Arial Black
+    fontWeight: '700',   // más negrita
+  }}
+>
+  Zonas
+</h2>
+
          {zonasPaginadas.map((zona) => {
   const disponibles = zona.total_de_parqueaderos - zona.parqueaderos_ocupados;
 
