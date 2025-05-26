@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import EdificiosImage from '../assets/icons/Edificios.svg';
 import BannerPublicidad from '../assets/icons/banner-publicidad.png';
 import Carrera122Image from '../assets/icons/carrera-122.png';
-// import CanasGordasImage from '../assets/icons/cañasgordas.png'; // Comentado temporalmente
+import CanasGordasImage from '../assets/icons/cañasgordas.png'; // Comentado temporalmente
 import Zona from '../components/ZoneCard';
 import { obtenerZonas } from '../services/api';
 
@@ -69,7 +69,7 @@ function Home() {
         style={{
           position: 'fixed',
           top: 0,
-          left: 0,
+          left: 40,
           height: '100vh',
           width: '80px',
           backgroundColor: '#000',
@@ -138,51 +138,80 @@ function Home() {
         </div>
 
         {/* Tarjetas paginadas estilo oscuro */}
-        <div style={{ width: '30vw', padding: '20px', backgroundColor: '#121212' }}>
-          <h2 style={{ color: '#fff', marginBottom: '16px', fontSize: '28px' }}>Zonas</h2>
-          {zonasPaginadas.map((zona) => {
-            const disponibles = zona.total_de_parqueaderos - zona.parqueaderos_ocupados;
+       {/* Tarjetas paginadas estilo oscuro */}
+          <div
+            style={{
+              width: '30vw',
+              height: '100vh',           // altura fija
+              padding: '20px',
+              backgroundColor: '#121212',
+              overflowY: 'auto'          // scroll vertical si se necesita
+            }}
+          >
 
-            return (
-              <div
-                key={zona.id}
-                style={{
-                  borderRadius: '12px',
-                  padding: '16px',
-                  marginBottom: '16px',
-                  backgroundColor: '#1e1e1e',
-                  color: '#fff',
-                  boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
-                }}
-              >
-                <h3 style={{ fontSize: '32px', fontWeight: '600', marginBottom: '12px' }}>
+          <h2 style={{ color: '#fff', marginBottom: '16px', fontSize: '28px' }}>Zonas</h2>
+         {zonasPaginadas.map((zona) => {
+  const disponibles = zona.total_de_parqueaderos - zona.parqueaderos_ocupados;
+
+  return (
+    <div
+      key={zona.id}
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderRadius: '12px',
+        padding: '16px 24px',
+        marginBottom: '16px',
+        backgroundColor: '#1e1e1e',
+        color: '#fff',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
+        fontFamily: 'Arial, sans-serif',
+      }}
+    >
+      {/* Zona ID grande a la izquierda */}
+      <div
+        style={{
+          fontSize: '48px',
+          fontWeight: '700',
+          color: 'white',
+        }}
+      >
+         <h3 style={{ fontSize: '32px', fontWeight: '600', marginBottom: '50px' }}>
                   Zona {zona.id}
                 </h3>
-                <p style={{ color: '#ccc', fontSize: '20px', margin: 0 }}>
-                  Disponibles:{' '}
-                  <span style={{ color: '#7BEE5F', fontWeight: 'bold', fontSize: '20px' }}>
-                    {disponibles}
-                  </span>
-                </p>
-                <p style={{ color: '#ccc', fontSize: '24px', margin: 0, textAlign: 'right' }}>
-                  Parqueaderos:{' '}
-                  <span style={{ color: '#FF4C4C', fontWeight: 'bold', fontSize: '24px' }}>
-                    {zona.total_de_parqueaderos}
-                  </span>
-                </p>
-              </div>
-            );
-          })}
+      </div>
+
+      {/* Info disponibles y total */}
+      <div style={{ textAlign: 'right' }}>
+        <p style={{ margin: 0, fontSize: '20px', color: '#ccc' }}>
+          Disponibles:
+          <span style={{ color: '#7BEE5F', fontWeight: 'bold', marginLeft: '8px' }}>
+            {disponibles}
+          </span>
+        </p>
+        <p style={{ margin: 0, fontSize: '20px', color: '#ccc' }}>
+          Parqueaderos:
+          <span style={{ color: '#FF4C4C', fontWeight: 'bold', marginLeft: '8px' }}>
+            {zona.total_de_parqueaderos}
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+})}
+
         </div>
       </div>
 
-      {/* Imagen de Cañasgordas comentada temporalmente */}
-      {/*
+      {/* Imagen de Cañasgordas  */}
+      {
       <div
         style={{
           position: 'fixed',
+          width: '50%',
           bottom: '100px',
-          left: '50%',
+          left: '30%',
           transform: 'translateX(-50%)',
           zIndex: 1001,
         }}
@@ -196,7 +225,7 @@ function Home() {
           }}
         />
       </div>
-      */}
+      }
 
       {/* Valla publicitaria */}
       <div
@@ -204,7 +233,7 @@ function Home() {
           position: 'fixed',
           bottom: 0,
           left: 0,
-          width: '100%',
+          width: '70%',
           backgroundColor: '#000',
           display: 'flex',
           justifyContent: 'center',
