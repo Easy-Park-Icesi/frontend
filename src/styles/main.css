@@ -12,3 +12,24 @@ html, body, #root {
 * {
   box-sizing: border-box;
 }
+
+.cuadro {
+  position: absolute;
+  background-color: #f9f9f9;
+  border: 3px solid #4a90e2;
+  border-radius: 20px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+  color: #333;
+  font-size: 32px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  transition: transform 0.2s;
+}
+
+.cuadro:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}

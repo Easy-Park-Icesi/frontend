@@ -46,13 +46,13 @@ function Home() {
   };
 
   const posiciones = {
-    a: { top: '250px', left: '67px', width: '145px', height: '181px' },
+    a: { top: '250px', left: '67px', width: '145px', height: '161px' },
     b: { top: '250px', left: '245px', width: '261px', height: '82px' },
     c: { top: '180px', left: '810px', width: '189px', height: '146px' },
     d: { top: '10px', left: '810px', width: '189px', height: '150px' },
     e: { top: '810px', left: '880px', width: '290px', height: '180px' },
     f: { top: '790px', left: '720px', width: '140px', height: '198px' },
-    g: { top: '870px', left: '245px', width: '394px', height: '116px' },
+    g: { top: '870px', left: '220px', width: '384px', height: '116px' },
     h: { top: '450px', left: '67px', width: '145px', height: '530px' },
     i: { top: '240px', left: '1024px', width: '130px', height: '85px' },
     j: { top: '10px', left: '1024px', width: '130px', height: '120px' },
