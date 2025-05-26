@@ -21,7 +21,7 @@ function Zona({ nombre, top, left, width, height, color }) {
       alignItems: 'center',
       fontWeight: '700',
       border: '5px solid black',
-<<<<<<< HEAD
+
       borderRadius: '16px',           // borde mucho más redondeado
       fontSize: '2.5rem',             // letra más grande
       fontFamily: `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`, // fuente agradable
@@ -29,11 +29,7 @@ function Zona({ nombre, top, left, width, height, color }) {
       userSelect: 'none',
       padding: '0 8px',               // un poco de padding para que la letra no quede tan pegada
       boxSizing: 'border-box',
-=======
-      borderRadius: '4px'
       
-
->>>>>>> 68d87d356c3e9efeab7e9b3c3176aaf52ec5f6f9
     }}>
       {nombre}
     </div>
