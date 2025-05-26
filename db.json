@@ -1,0 +1,29 @@
+{
+  "zonas": [
+    {
+      "id": "A",
+      "color": "#7BEE5F",
+      "parqueaderos_ocupados": 12,
+      "total_de_parqueaderos": 40
+    },
+    {
+      "id": "B",
+      "color": "#7BEE5F",
+      "parqueaderos_ocupados": 40,
+      "total_de_parqueaderos": 40
+    },
+    {
+      "id": "C",
+      "color": "#7BEE5F",
+      "parqueaderos_ocupados": 15,
+      "total_de_parqueaderos": 40
+    },
+    {
+      "id": "D",
+      "color": "#7BEE5F",
+      "parqueaderos_ocupados": 38,
+      "total_de_parqueaderos": 40
+    }
+
+  ]
+}
