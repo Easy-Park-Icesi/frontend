@@ -5,6 +5,8 @@ import Carrera122Image from '../assets/icons/carrera-122.png';
 import CanasGordasImage from '../assets/icons/cañasgordas.png'; // Comentado temporalmente
 import Zona from '../components/ZoneCard';
 import { obtenerZonas } from '../services/api';
+import  ZoneInforCard from '../components/ZoneInfoCard';
+
 
 function Home() {
   const [zonas, setZonas] = useState([]);
@@ -178,20 +180,20 @@ function Home() {
         }}
       >
          <h3 style={{ fontSize: '32px', fontWeight: '600', marginBottom: '50px' }}>
-                  Zona {zona.id}
+                  Zona {zona.id.toUpperCase()}
                 </h3>
       </div>
 
       {/* Info disponibles y total */}
       <div style={{ textAlign: 'right' }}>
-        <p style={{ margin: 0, fontSize: '20px', color: '#ccc' }}>
+        <p style={{ margin: 0, fontSize: '30px', color: '#ccc' }}>
           Disponibles:
           <span style={{ color: '#7BEE5F', fontWeight: 'bold', marginLeft: '8px' }}>
             {disponibles}
           </span>
         </p>
-        <p style={{ margin: 0, fontSize: '20px', color: '#ccc' }}>
-          Parqueaderos:
+        <p style={{ margin: 0, fontSize: '30px', color: '#ccc' }}>
+          Ocupados:
           <span style={{ color: '#FF4C4C', fontWeight: 'bold', marginLeft: '8px' }}>
             {zona.total_de_parqueaderos}
           </span>
