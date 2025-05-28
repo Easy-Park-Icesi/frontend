@@ -236,7 +236,7 @@ function Home() {
           </span>
         </p>
         <p style={{ margin: 0, fontSize: '30px', color: '#ccc' }}>
-          Ocupados:
+          Parqueaderos:
           <span style={{ color: '#FF4C4C', fontWeight: 'bold', marginLeft: '8px' }}>
             {zona.total_de_parqueaderos}
           </span>
